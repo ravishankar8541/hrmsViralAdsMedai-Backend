@@ -68,19 +68,13 @@ const sendOfferLetter = async (to, offer) => {
 try {
   const info = await transporter.sendMail(mailOptions);
   console.log("Email sent:", info.response);
-
-  res.json({
-    success: true,
-    message: "Email sent successfully"
-  });
+  return info;
 
 } catch (error) {
-  console.error("EMAIL ERROR:", error);   // 👈 THIS LINE
-  res.status(500).json({
-    success: false,
-    message: "Failed to send email"
-  });
+  console.error("EMAIL ERROR:", error);
+  throw error;
 }
+
 
 
 };
